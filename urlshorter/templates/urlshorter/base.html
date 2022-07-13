@@ -10,17 +10,7 @@
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
-<div class="log-text">
-    {% if request.user.is_authenticated %}
-    Welcome to my test task, <strong>{{ request.user.username}}</strong> <br>
-    <a class="reg" href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    <a class="reg" href="{% url 'register' %}">Register</a> | <a class="reg" href="{% url 'login' %}">Login</a>
-    {% endif%}
-</div>
-
-    {% block content %} {% endblock %}
- {% if messages %}
+{% if messages %}
 
         {% for message in messages %}
 
@@ -36,6 +26,17 @@
 
         {% endfor %}
         {% endif%}
+<div class="log-text">
+    {% if request.user.is_authenticated %}
+    Welcome to my test task, <strong>{{ request.user.username}}</strong> <br>
+    <a class="reg" href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a class="reg" href="{% url 'register' %}">Register</a> | <a class="reg" href="{% url 'login' %}">Login</a>
+    {% endif%}
+</div>
+
+    {% block content %} {% endblock %}
+
 
 </body>
 </html>
