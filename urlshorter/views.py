@@ -64,6 +64,7 @@ def user_login(request):
 
 
 def user_logout(request):
+    """Using logout function"""
     logout(request)
     return redirect('index')
 
