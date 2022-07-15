@@ -8,6 +8,9 @@ from .forms import UrlForm, UserRegisterForm, UserLoginForm
 
 
 def index(request):
+    """Url is generated automatically. Using the function uuid4()
+    The domain will be the address of the server
+    If the user is registered, all short links will be displayed to him"""
     domain = 'localhost:8000/'   # enter your domain here
     all_links = Url.objects.all()
     url_id = str(uuid4())[:6]
@@ -27,6 +30,7 @@ def index(request):
 
 
 def generated_url(request, pk):
+    """Gets the address of the full link and redirects to it"""
     origin_url = Url.objects.get(url_id=pk)
     return redirect(origin_url.source_url)
 
