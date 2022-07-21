@@ -1,0 +1,32 @@
+
+{% if is_paginated %}
+
+<nav class="navi" aria-label="">
+    <ul class="pagination pagination-lg">
+        <li class="page-item {% if not prev %} disabled {% endif %} ">
+            <a href="{{prev}}" class="page-link">Previous</a>
+        </li>
+
+        {% for n in page.paginator.page_range %}
+
+            {% if page.number == n %}
+                <li class="page-item test">
+                <a class="page-link" href="?page={{ n }}">{{n}}</a>
+                </li>
+
+            {% else %}
+
+                <li class="page-item">
+                <a class="page-link" href="?page={{ n }}">{{n}}</a>
+                </li>
+            {% endif %}
+
+        {% endfor %}
+
+        <li class="page-item {% if not next %} disabled {% endif %} ">
+            <a href="{{ next }}" class="page-link">Next</a>
+        </li>
+    </ul>
+</nav>
+
+{% endif %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Shorter {% endblock %}
+
+{% block greetings %}
+<div class="home">
+    {% if user.is_authenticated %}
+    {% else %}
+    <h2>HI! Welcome to my application that allows you to simplify your interactions with the web.  For further work on the site you need to <strong><a class="nav-item" href="{% url 'login' %}">log in</a></strong> or <strong><a
+            class="nav-item" href="{% url 'register' %}">registration</a></strong>. </h2>
+    {% endif %}
+</div>
+    {% if user.is_authenticated %}
+    <div class="shorter-content">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-dark" type="submit"> Generate </button>
+    </form>
+        {% if error %}
+        <h1>{{error}}</h1>
+        {% endif %}
+
+        {% if url_id %}
+        <h1><a href="{% url 'to_source_url' url_id %}">{{ result }}</a></h1>
+        {% endif %}
+    </div>
+    <div class="list-shorter">
+        <h3>Here will be display the list of your urls</h3>
+        <ul>
+            {% for item in list %}
+            <li>
+                <div class="short_url">
+                    <a style="width: 80%" href="{%url 'to_source_url' item.url_id %}">{{item.source_url}}</a>
+                <div>
+                    <a class="link_to_another" href="{% url 'to_source_url' item.url_id %}">{{domain}}{{item.url_id}}</a>
+                    <a href="{% url 'delete' item.url_id %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+    </svg>
+</a>
+                </div>
+                </div>
+
+            </li>
+            <hr>
+            {% endfor %}
+        </ul>
+
+    </div>
+{% endif %}
+{% endblock %}

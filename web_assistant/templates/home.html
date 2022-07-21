@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block greetings %}
+<div class="home">
+    {% if user.is_authenticated %}
+    <h1>Welcome, {{user|title}}</h1>
+    <h2>Please select the application you would like to use:</h2>
+    {% else %}
+    <h2>HI! Welcome to my application that allows you to simplify your interactions with the web.  For further work on the site you need to <strong><a class="nav-item" href="{% url 'login' %}">log in</a></strong> or <strong><a
+            class="nav-item" href="{% url 'register' %}">registration</a></strong>. </h2>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block shorter %}
+<h2><a href="{% url 'shorter' %}">URL SHORTER</a></h2>
+<p>This is a URL shortener app. You just need to enter the url you would like to shorten, your link will be stored in our database and the server will give you the generated shorter url.</p>
+{% endblock %}
+
+{% block agent %}
+<h2><a href="{% url 'user_agent' %}">RANDOM USER-AGENT</a></h2>
+<p>These is an application for creating random generation of User Agents.
+Here you can get any user agent you like and use it for your needs. Our database contains a large number of User agents for every taste. It can also be randomly generated, you just need to click on the button and get a new User-Agent!
+</p>
+{% endblock %}
